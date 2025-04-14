@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Run Coach Day 1</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 2rem;
+    }
+    #status {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏃‍♀️ Coach Me: Day 1 Run</h1>
+  <p>6x 3-min Run / 2-min Walk | Total: ~35 mins</p>
+  <button onclick="startRun()">Start Run Session</button>
+  <div id="status"></div>
+
+  <script>
+    const intervals = [
+      { type: 'Warm-up Walk', duration: 5 },
+      ...Array(6).flatMap(() => [
+        { type: 'Run', duration: 3 },
+        { type: 'Walk', duration: 2 }
+      ]),
+      { type: 'Cool-down Walk', duration: 5 }
+    ];
+
+    let index = 0;
+    let isRunning = false;
+    const statusEl = document.getElementById('status');
+
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.rate = 1;
+      msg.pitch = 1;
+      window.speechSynthesis.speak(msg);
+    }
+
+    function nextInterval() {
+      if (index >= intervals.length) {
+        speak("Workout complete. Great job!");
+        statusEl.textContent = "✅ All done! You crushed it.";
+        return;
+      }
+      const current = intervals[index];
+      speak(`${current.type} for ${current.duration} minutes.`);
+      statusEl.textContent = `${current.type} - ${current.duration} min`;
+      index++;
+      setTimeout(nextInterval, current.duration * 60 * 1000);
+    }
+
+    function startRun() {
+      if (isRunning) return;
+      isRunning = true;
+      speak("Let's get started! Coach Me Day 1 begins now.");
+      nextInterval();
+    }
+  </script>
+</body>
+</html>
