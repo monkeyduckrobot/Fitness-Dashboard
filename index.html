@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Tracker Prototype</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #24292e;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+    .countdown {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #f56565;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .section-title {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #4a5568;
+    }
+    .bar {
+      background: #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 16px;
+      margin-bottom: 1rem;
+    }
+    .fill {
+      height: 100%;
+      background-color: #48bb78;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table td, table th {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #edf2f7;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Fitness Dashboard</h1>
+    <p>Personalized tracker for health, workouts, and progress</p>
+    <div class="countdown" id="countdown">Loading...</div>
+  </header>
+  <div class="container">
+    <div class="card">
+      <div class="section-title">Daily Summary</div>
+      <p>Calories: 1430 / 1800</p>
+      <div class="bar"><div class="fill" style="width: 79%"></div></div>
+      <p>Protein: 125g / 140g</p>
+      <p>Water: 6 / 8 cups</p>
+      <p>Weight: 170 lbs</p>
+      <p>Waist: 32 in</p>
+    </div>
+    <div class="card">
+      <div class="section-title">Activity + Supplements</div>
+      <p>Workout: Revive Week 3 – Strength + 30 min walk ✔</p>
+      <p>Caffeine: 2.5 cups (Spring Blend)</p>
+      <p>Creatine: 5g ✔</p>
+      <p>Magnesium, B-Complex + Calcium ✔</p>
+    </div>
+    <div class="card">
+      <div class="section-title">Mood & Hunger</div>
+      <table>
+        <tr><th>Mood</th><th>Hunger</th><th>Time</th><th>Notes</th></tr>
+        <tr><td>Good</td><td>Slightly hungry</td><td>7:45 AM</td><td>After breakfast</td></tr>
+        <tr><td>Hungry</td><td>Moderately hungry</td><td>12:00 PM</td><td>Skipped lunch</td></tr>
+        <tr><td>Stressed</td><td>Very hungry</td><td>3:30 PM</td><td>Long day at work</td></tr>
+        <tr><td>Okay</td><td>Not hungry</td><td>8:15 PM</td><td>Light dinner</td></tr>
+      </table>
+    </div>
+  </div>
+  <footer>
+    Export | Sync MyFitnessPal | Dark Mode (Coming Soon)
+  </footer>
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date('2025-07-30');
+    const today = new Date();
+    const diff = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+    countdownElement.innerText = `${diff} days left to July 30`;
+  </script>
+</body>
+</html>
